@@ -14,7 +14,7 @@ export class WisModChooser extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className={this.props.hide}>
 				<span style={{fontSize:16, marginRight:10}}>Choose your Wisdom modifier:</span>
 				<input 
 					style={{textAlign:'center'}}

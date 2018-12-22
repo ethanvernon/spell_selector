@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {LevelChooser} from './LevelChooser';
 import {WisModChooser} from './WisModChooser';
+import {SelectionHeader} from './SelectionHeader';
 
 export class Parent extends Component {
 
@@ -14,17 +15,19 @@ export class Parent extends Component {
 	      					'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
 	      	secondLevel: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 'Lesser Restoration', 
 	      					'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
-	      	clericLevel: 1,
-	      	levelOneSlots: 2,
-	      	levelTwoSlots: 0,
+	      	clericLevel: 3,
+	      	levelOneSlots: 4,
+	      	levelTwoSlots: 2,
 	      	wisdomMod: 3,
-	      	spellNumber: 4
+	      	spellNumber: 6,
+	      	hide: ""
 	    };
 
 	    this.changeClericLevel = this.changeClericLevel.bind(this);
 	    this.changeSpellSlots = this.changeSpellSlots.bind(this);
 	    this.changeWisMod = this.changeWisMod.bind(this);
 	    this.changeSpellNumber = this.changeSpellNumber.bind(this);
+	    this.hideForChoosing = this.hideForChoosing.bind(this);
 	}
 
 	changeClericLevel(newLevel) {
@@ -73,22 +76,35 @@ export class Parent extends Component {
 		})
 	}
 
+	hideForChoosing() {
+		this.setState({
+			hide: "hidden"
+		})
+	}
+
 
 	render() {
 		return (
 			<div>
-				<h2 style={{marginBottom:0}}>Spell Selector</h2>
-				<h4 style={{marginTop:0}}>Level {this.state.clericLevel} Cleric</h4>
-				<h5 style={{marginTop:0, marginBottom:0}}>{this.state.levelOneSlots} Level 1 Spell Slots</h5>
-				<h5 style={{marginTop:0}}>{this.state.levelTwoSlots} Level 2 Spell Slots</h5>
-				<h5 style={{marginTop:0}}>You may prepare {this.state.spellNumber} spells</h5>
+				<SelectionHeader
+					level={this.state.clericLevel}
+					levelOne={this.state.levelOneSlots}
+					levelTwo={this.state.levelTwoSlots}
+					spellNumber={this.state.spellNumber}
+					handleClick = {this.hideForChoosing}
+					hide = {this.state.hide}/>			
 
 				<LevelChooser
+					className={this.state.hide}
 					onChange = {this.changeClericLevel}
-					level={this.state.clericLevel}/>
+					level={this.state.clericLevel}
+					hide = {this.state.hide}/>
+
 				<WisModChooser
+				 	className={this.state.hide}
 					onChange = {this.changeWisMod}
-					wisMod={this.state.wisdomMod}/>
+					wisMod={this.state.wisdomMod}
+					hide = {this.state.hide}/>
 			</div>
 			)
 	}
