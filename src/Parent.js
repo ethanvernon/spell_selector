@@ -16,12 +16,18 @@ export class Parent extends Component {
 	      					'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
 	      	secondLevel: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 'Lesser Restoration', 
 	      					'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
+	      	firstLevelChoice: 	['Bane', 'Bless', 'Command', 'Create or Destroy Water', 'Cure Wounds', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
+	      						'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
+	      	secondLevelChoice: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 'Lesser Restoration', 
+	      						'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
 	      	clericLevel: 3,
+	      	cantripsKnown: 3,
 	      	levelOneSlots: 4,
 	      	levelTwoAvail: true,
 	      	levelTwoSlots: 2,
 	      	wisdomMod: 3,
 	      	spellNumber: 6,
+	      	spellChoiceNumber: 6,
 	      	startScreenHide: "",
 	      	chooseScreenHide: "hidden"
 	    };
@@ -31,6 +37,7 @@ export class Parent extends Component {
 	    this.changeWisMod = this.changeWisMod.bind(this);
 	    this.changeSpellNumber = this.changeSpellNumber.bind(this);
 	    this.hideForChoosing = this.hideForChoosing.bind(this);
+	    this.updateSpellChoiceNumber = this.updateSpellChoiceNumber.bind(this);
 	}
 
 	changeClericLevel(newLevel) {
@@ -46,6 +53,7 @@ export class Parent extends Component {
 
 		let levelOne = level+1 > 4 ? 4 : level+1;
 		let levelTwo =[];
+		let cantrips;
 		
 		if (level < 3) {
 			levelTwo[0] = 0;
@@ -58,10 +66,19 @@ export class Parent extends Component {
 			levelTwo[1] = true;
 		}
 
+		if (level < 4) {
+			cantrips = 3;
+		} else if (level < 10) {
+			cantrips = 4;
+		} else {
+			cantrips = 5;
+		}
+
 		this.setState({
 			levelOneSlots: levelOne,
 			levelTwoSlots: levelTwo[0],
-			levelTwoAvail: levelTwo[1]
+			levelTwoAvail: levelTwo[1],
+			cantripsKnown: cantrips
 		})
 	}
 
@@ -79,7 +96,8 @@ export class Parent extends Component {
 		(mod + level < 1) ? total=1 : total=level+mod;
 
 		this.setState({
-			spellNumber: total
+			spellNumber: total,
+			spellChoiceNumber: total
 		})
 	}
 
@@ -88,6 +106,30 @@ export class Parent extends Component {
 			startScreenHide: "hidden",
 			chooseScreenHide: ""
 		})
+	}
+
+	updateSpellChoiceNumber(spell) {
+		let remaining = parseInt(this.state.spellChoiceNumber) - 1;
+		let arr = [];
+		let match;
+
+		if (this.state.firstLevelChoice.includes(spell)) {
+			arr = this.state.firstLevelChoice;
+			match=1;
+		} else {
+			arr = this.state.secondLevelChoice;
+			match=2;
+		}
+
+		console.log(arr);
+
+		arr.splice(arr.indexOf(spell), 1);
+
+		this.setState({
+			spellChoiceNumber: remaining
+		})
+
+		match===1 ? this.setState({firstLevelChoice: arr}) : this.setState({secondLevelChoice: arr})
 	}
 
 
@@ -102,8 +144,8 @@ export class Parent extends Component {
 					handleClick = {this.hideForChoosing}
 					hide = {this.state.startScreenHide}
 					wisMod = {this.state.wisdomMod}
-					levelTwoAvail = {this.state.levelTwoAvail}/>
-				<br/>
+					levelTwoAvail = {this.state.levelTwoAvail}
+					cantripsKnown = {this.state.cantripsKnown}/>
 
 				<LevelChooser
 					onChange = {this.changeClericLevel}
@@ -116,7 +158,12 @@ export class Parent extends Component {
 					hide = {this.state.startScreenHide}/>
 
 				<SpellChoosing
-					hide = {this.state.chooseScreenHide}/>
+					hide = {this.state.chooseScreenHide}
+					cantrips = {this.state.myCantrips}
+					levelOne = {this.state.firstLevelChoice}
+					levelTwo = {this.state.secondLevelChoice}
+					spellNumber = {this.state.spellChoiceNumber}
+					onClick = {this.updateSpellChoiceNumber}/>
 
 			</div>
 			)

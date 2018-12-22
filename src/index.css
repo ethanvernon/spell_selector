@@ -16,3 +16,7 @@ code {
 .hidden {
 	display:none;
 }
+
+.spell-buttons {
+	margin: 5px;
+}
