@@ -15,7 +15,7 @@ export class LevelChooser extends Component {
 	render() {
 		return (
 			<div>
-				<span style={{fontSize:16, marginRight:10}}>Choose your level</span>
+				<span style={{fontSize:16, marginRight:10}}>Choose your level:</span>
 				<input 
 					style={{textAlign:'center'}}
 		        	id="clericLevel"
