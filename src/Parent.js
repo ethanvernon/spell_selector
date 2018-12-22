@@ -3,6 +3,7 @@ import './App.css';
 import {LevelChooser} from './LevelChooser';
 import {WisModChooser} from './WisModChooser';
 import {SelectionHeader} from './SelectionHeader';
+import {SpellChoosing} from './SpellChoosing';
 
 export class Parent extends Component {
 
@@ -20,7 +21,8 @@ export class Parent extends Component {
 	      	levelTwoSlots: 2,
 	      	wisdomMod: 3,
 	      	spellNumber: 6,
-	      	hide: ""
+	      	startScreenHide: "",
+	      	chooseScreenHide: "hidden"
 	    };
 
 	    this.changeClericLevel = this.changeClericLevel.bind(this);
@@ -78,7 +80,8 @@ export class Parent extends Component {
 
 	hideForChoosing() {
 		this.setState({
-			hide: "hidden"
+			startScreenHide: "hidden",
+			chooseScreenHide: ""
 		})
 	}
 
@@ -92,20 +95,22 @@ export class Parent extends Component {
 					levelTwo={this.state.levelTwoSlots}
 					spellNumber={this.state.spellNumber}
 					handleClick = {this.hideForChoosing}
-					hide = {this.state.hide}
+					hide = {this.state.startScreenHide}
 					wisMod = {this.state.wisdomMod}/>
+				<br/>
 
 				<LevelChooser
-					className={this.state.hide}
 					onChange = {this.changeClericLevel}
 					level={this.state.clericLevel}
-					hide = {this.state.hide}/>
+					hide = {this.state.startScreenHide}/>
 
 				<WisModChooser
-				 	className={this.state.hide}
 					onChange = {this.changeWisMod}
 					wisMod={this.state.wisdomMod}
-					hide = {this.state.hide}/>
+					hide = {this.state.startScreenHide}/>
+
+				<SpellChoosing
+					hide = {this.state.chooseScreenHide}/>
 
 			</div>
 			)
