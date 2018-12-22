@@ -17,10 +17,9 @@ export class SelectionHeader extends Component {
 			<div>
 				<h2 style={{marginBottom:0}}>Spell Selector</h2>
 				<div className={this.props.hide}>
-					<h4 style={{marginTop:0}}>Level {this.props.level} Life Cleric</h4>
-					<h5 style={{marginTop:0, marginBottom:0}}>{this.props.levelOne} Level 1 Spell Slots</h5>
-					<h5 style={{marginTop:0}}>{this.props.levelTwo} Level 2 Spell Slots</h5>
-					<h5 style={{marginTop:0}}>You may prepare {this.props.spellNumber} spells: <button onClick={this.handleClick}>Prepare now</button></h5>
+					<p style={{fontSize:14, maxWidth:300}}>You are a level {this.props.level} Life Cleric. At this level, you may use {this.props.levelOne} level 1 spell slots,
+					 and {this.props.levelTwo} level 2 spell slots. With your Wisdom modifier ({this.props.wisMod}), you may prepare {this.props.spellNumber} spells.</p>
+					<button onClick={this.handleClick}>Prepare now</button>
 				</div>
 			</div>
 		)

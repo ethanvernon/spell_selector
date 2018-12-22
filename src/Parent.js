@@ -92,7 +92,8 @@ export class Parent extends Component {
 					levelTwo={this.state.levelTwoSlots}
 					spellNumber={this.state.spellNumber}
 					handleClick = {this.hideForChoosing}
-					hide = {this.state.hide}/>			
+					hide = {this.state.hide}
+					wisMod = {this.state.wisdomMod}/>
 
 				<LevelChooser
 					className={this.state.hide}
@@ -105,6 +106,7 @@ export class Parent extends Component {
 					onChange = {this.changeWisMod}
 					wisMod={this.state.wisdomMod}
 					hide = {this.state.hide}/>
+
 			</div>
 			)
 	}
