@@ -18,6 +18,7 @@ export class Parent extends Component {
 	      					'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
 	      	clericLevel: 3,
 	      	levelOneSlots: 4,
+	      	levelTwoAvail: true,
 	      	levelTwoSlots: 2,
 	      	wisdomMod: 3,
 	      	spellNumber: 6,
@@ -44,19 +45,23 @@ export class Parent extends Component {
 	changeSpellSlots(level) {
 
 		let levelOne = level+1 > 4 ? 4 : level+1;
-		let levelTwo;
+		let levelTwo =[];
 		
 		if (level < 3) {
-			levelTwo = 0;
+			levelTwo[0] = 0;
+			levelTwo[1] = false;
 		} else if (level == 3) {
-			levelTwo = 2;
+			levelTwo[0] = 2;
+			levelTwo[1] = true;
 		} else if (level > 3) {
-			levelTwo = 3;
+			levelTwo[0] = 3;
+			levelTwo[1] = true;
 		}
 
 		this.setState({
 			levelOneSlots: levelOne,
-			levelTwoSlots: levelTwo
+			levelTwoSlots: levelTwo[0],
+			levelTwoAvail: levelTwo[1]
 		})
 	}
 
@@ -96,7 +101,8 @@ export class Parent extends Component {
 					spellNumber={this.state.spellNumber}
 					handleClick = {this.hideForChoosing}
 					hide = {this.state.startScreenHide}
-					wisMod = {this.state.wisdomMod}/>
+					wisMod = {this.state.wisdomMod}
+					levelTwoAvail = {this.state.levelTwoAvail}/>
 				<br/>
 
 				<LevelChooser
