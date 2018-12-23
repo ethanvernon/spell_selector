@@ -7,6 +7,7 @@ export class LevelChooser extends Component {
 	    this.handleLevel = this.handleLevel.bind(this);
 	}
 
+	//passes input value to Parent.js' changeCleric Level function which updates states
 	handleLevel(e) {
     	this.props.onChange(parseInt(e.target.value));
 	}

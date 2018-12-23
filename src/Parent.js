@@ -46,6 +46,8 @@ export class Parent extends Component {
 	    this.updateSpellChoiceNumber = this.updateSpellChoiceNumber.bind(this);
 	}
 
+	//called by LevelChooser.js whenever cleric level input is changed
+	//sets state, and calls functions to update spell slots and number of prepared spells
 	changeClericLevel(newLevel) {
 		this.setState({
 			clericLevel: newLevel
@@ -55,6 +57,8 @@ export class Parent extends Component {
 		this.changeSpellNumber(this.state.wisdomMod, newLevel);
 	}
 
+	//called by changeClericLevel function
+	//updates number of spell slots available based on level
 	changeSpellSlots(level) {
 
 		let levelOne = level+1 > 4 ? 4 : level+1;
@@ -88,6 +92,8 @@ export class Parent extends Component {
 		})
 	}
 
+	//called by WisModChooser.js whenever wisdom mod input is changed
+	//calls function changeSpellNumber to update number of prepared spells
 	changeWisMod (newMod) {
 		this.setState({
 			wisdomMod: newMod
@@ -96,6 +102,8 @@ export class Parent extends Component {
 		this.changeSpellNumber(newMod, this.state.clericLevel);
 	}
 
+	//called by changeWisMod and changeClericLevel
+	//updates number of prepared spells available
 	changeSpellNumber(mod, level) {
 		let total;
 
@@ -107,6 +115,8 @@ export class Parent extends Component {
 		})
 	}
 
+	//called by SelectionHeader.js whenever "Prepare Now" button is clicked
+	//updates states which apply/remove hidden class from components
 	hideForChoosing() {
 		this.setState({
 			startScreenHide: "hidden",
@@ -114,6 +124,9 @@ export class Parent extends Component {
 		})
 	}
 
+	//called by SpellChoosing.js whenever a spell is clicked
+	//takes the base spell name, removes it from firstLevelChoice or secondLevelChoice, adds it to either choseFirst or choseSecond
+	//and updates spellChoiceNumber to reflect remaining number of prepared spell choices
 	updateSpellChoiceNumber(spell) {
 		let remaining = parseInt(this.state.spellChoiceNumber) - 1;
 		let arr = [];
@@ -121,6 +134,7 @@ export class Parent extends Component {
 		let chosenArrOne = this.state.choseFirst;
 		let chosenArrTwo = this.state.choseSecond;
 
+		//checks if it is a level 1 spell or a level 2 spell
 		if (this.state.firstLevelChoice.includes(spell)) {
 			arr = this.state.firstLevelChoice;
 			chosenArrOne.push(spell);
@@ -131,23 +145,19 @@ export class Parent extends Component {
 			match=2;
 		}
 
-		console.log(arr);
-
+		//removes the chosen spell from the choices
 		arr.splice(arr.indexOf(spell), 1);
 
-		this.setState({
-			spellChoiceNumber: remaining
-		})
-
-		
-
+		//updates states to reflect remaining number of choices, choice arrays, and chosen spell arrays
 		if (match===1) {
 			this.setState({
+				spellChoiceNumber: remaining,
 				firstLevelChoice: arr,
 				choseFirst: chosenArrOne
 			});
 		} else {
 			this.setState({
+				spellChoiceNumber: remaining,
 				secondLevelChoice: arr,
 				choseSecond: chosenArrTwo
 			});

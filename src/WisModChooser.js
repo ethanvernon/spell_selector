@@ -7,6 +7,7 @@ export class WisModChooser extends Component {
 	    this.handleMod = this.handleMod.bind(this);
 	}
 
+	//passes value of input to Parent.js changeWisMod function which updats states
 	handleMod(e) {
     	this.props.onChange(parseInt(e.target.value));
 	}

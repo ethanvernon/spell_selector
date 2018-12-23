@@ -21,6 +21,8 @@ export class Chosen extends Component {
 		'Enhance Ability', 'Hold Person', 'Locate Object', 'Silence'];
 		let domainSpell=this.props.domainSpellsFirst.concat(this.props.domainSpellsSecond);
 
+		//makes a button out of each spell just like in SpellChoosing.js
+		//adds a D for domain spells
 		if (this.props.chosenOne.length) {
 			for (var i=0; i<this.props.chosenOne.length; i++) {
 				levelOneArray.push(<button className="spell-buttons" key={"levelOneChose"+i} onClick={this.handleClick}>
@@ -34,6 +36,8 @@ export class Chosen extends Component {
 			}
 		}
 
+		//makes a button out of each spell just like in SpellChoosing.js
+		//adds a D for domain spells
 		if (this.props.chosenTwo.length) {
 			for (var i=0; i<this.props.chosenTwo.length; i++) {
 				levelTwoArray.push(<button className="spell-buttons" key={"levelTwoChose"+i} onClick={this.handleClick}>
@@ -48,13 +52,17 @@ export class Chosen extends Component {
 		}
 
 		return (
+
+			//only shows when "Prepare Now" has been clicked in SelectionHeader.js
 			<div className={this.props.hide} style={{border:"1px solid white", height:"8em"}}>
 				<p>Chosen (click to remove):</p>
+				{/*conditionally renders */}
 				{this.props.chosenOne.length > 0 && 				
 					<div>
 						First level: {levelOneArray}
 					</div>
 				}
+				{/*conditionally renders */}
 				{this.props.chosenTwo.length > 0 && 				
 					<div>
 						Second level: {levelTwoArray}

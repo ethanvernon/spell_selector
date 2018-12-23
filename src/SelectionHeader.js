@@ -7,6 +7,7 @@ export class SelectionHeader extends Component {
 	    this.handleClick = this.handleClick.bind(this);
 	}
 
+	//calls Parent.js' hideForChoosing function which updates state to hide this page and show next one
 	handleClick() {
 		this.props.handleClick();
 	}
