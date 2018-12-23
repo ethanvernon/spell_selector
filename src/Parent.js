@@ -5,6 +5,7 @@ import {WisModChooser} from './WisModChooser';
 import {SelectionHeader} from './SelectionHeader';
 import {SpellChoosing} from './SpellChoosing';
 import 'bootstrap/dist/css/bootstrap.css';
+import {Chosen} from './Chosen';
 
 export class Parent extends Component {
 
@@ -13,14 +14,14 @@ export class Parent extends Component {
 
 	    this.state = {
 	    	cantrips: 		['Guidance', 'Light', 'Mending', 'Resistance', 'Sacred Flame', 'Spare the Dying', 'Thaumaturgy'],	    	
-	     	firstLevel: 	['Bane', 'Bless', 'Command', 'Create or Destroy Water', 'Cure Wounds', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
+	     	firstLevel: 	['Bane', 'Command', 'Create or Destroy Water', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
 	      					'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
 	      	secondLevel: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 'Lesser Restoration', 
 	      					'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
-	      	firstLevelChoice: 	['Bane', 'Bless', 'Command', 'Create or Destroy Water', 'Cure Wounds', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
+	      	firstLevelChoice: 	['Bane', 'Command', 'Create or Destroy Water', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
 	      						'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
-	      	secondLevelChoice: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 'Lesser Restoration', 
-	      						'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
+	      	secondLevelChoice: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 
+	      						'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Warding Bond', 'Zone of Truth'],
 	      	clericLevel: 3,
 	      	cantripsKnown: 3,
 	      	levelOneSlots: 4,
@@ -30,7 +31,11 @@ export class Parent extends Component {
 	      	spellNumber: 6,
 	      	spellChoiceNumber: 6,
 	      	startScreenHide: "",
-	      	chooseScreenHide: "hidden"
+	      	chooseScreenHide: "hidden",
+	      	domainSpellsFirst: ["Bless", "Cure Wounds"],
+	      	domainSpellsSecond: ["Lesser Restoration", "Spiritual Weapon"],
+	      	choseFirst: ["Bless", "Cure Wounds"],
+	      	choseSecond: ["Lesser Restoration", "Spiritual Weapon"]
 	    };
 
 	    this.changeClericLevel = this.changeClericLevel.bind(this);
@@ -113,12 +118,16 @@ export class Parent extends Component {
 		let remaining = parseInt(this.state.spellChoiceNumber) - 1;
 		let arr = [];
 		let match;
+		let chosenArrOne = this.state.choseFirst;
+		let chosenArrTwo = this.state.choseSecond;
 
 		if (this.state.firstLevelChoice.includes(spell)) {
 			arr = this.state.firstLevelChoice;
+			chosenArrOne.push(spell);
 			match=1;
 		} else {
 			arr = this.state.secondLevelChoice;
+			chosenArrTwo.push(spell);
 			match=2;
 		}
 
@@ -130,7 +139,19 @@ export class Parent extends Component {
 			spellChoiceNumber: remaining
 		})
 
-		match===1 ? this.setState({firstLevelChoice: arr}) : this.setState({secondLevelChoice: arr})
+		
+
+		if (match===1) {
+			this.setState({
+				firstLevelChoice: arr,
+				choseFirst: chosenArrOne
+			});
+		} else {
+			this.setState({
+				secondLevelChoice: arr,
+				choseSecond: chosenArrTwo
+			});
+		}
 	}
 
 
@@ -168,13 +189,21 @@ export class Parent extends Component {
 				</div>
 				</div>
 
+				<Chosen 
+					hide = {this.state.chooseScreenHide}
+					chosenOne = {this.state.choseFirst}
+					chosenTwo = {this.state.choseSecond}
+					domainSpellsFirst={this.state.domainSpellsFirst}
+					domainSpellsSecond={this.state.domainSpellsSecond}/>
+
 				<SpellChoosing
 					hide = {this.state.chooseScreenHide}
 					cantrips = {this.state.myCantrips}
 					levelOne = {this.state.firstLevelChoice}
 					levelTwo = {this.state.secondLevelChoice}
 					spellNumber = {this.state.spellChoiceNumber}
-					onClick = {this.updateSpellChoiceNumber}/>
+					onClick = {this.updateSpellChoiceNumber}
+					level={this.state.clericLevel}/>
 
 			</div>
 			)

@@ -9,7 +9,7 @@ export class SpellChoosing extends Component {
 
 	handleClick(e) {
 		let spells=this.props.levelOne.concat(this.props.levelTwo)
-		let spell=e.target.innerText;
+		let spell=e.currentTarget.innerText;
 		let sglSpell = spell.slice(0, -1);
 		let dblSpell = spell.slice(0, -2);
 
@@ -31,14 +31,13 @@ export class SpellChoosing extends Component {
 		let levelOneArray=[];
 		let levelTwoArray=[];
 
-		let oneBonus=['Healing Word', 'Sanctuary', 'Shield of Faith'];
-		let oneCon=['Bane', 'Bless', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Protection from Evil and Good', 'Shield of Faith'];
-		let twoBonus=['Spiritual Weapon'];
-		let twoCon=['Calm Emotions', 'Enhance Ability', 'Hold Person', 'Locate Object', 'Silence'];
+		let bonusAction=['Healing Word', 'Sanctuary', 'Shield of Faith', 'Spiritual Weapon'];
+		let conSpell=['Bane', 'Bless', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Protection from Evil and Good', 'Shield of Faith', 'Calm Emotions', 
+		'Enhance Ability', 'Hold Person', 'Locate Object', 'Silence'];
 
 		for (var i=0; i<this.props.levelOne.length; i++) {
 			levelOneArray.push(<button className="spell-buttons" key={"levelOne"+i} onClick={this.handleClick}>
-				{this.props.levelOne[i]}{oneBonus.includes(this.props.levelOne[i])?<sup>B</sup>:null}{oneCon.includes(this.props.levelOne[i])?<sup>C</sup>:null}
+				{this.props.levelOne[i]}{bonusAction.includes(this.props.levelOne[i])?<sup>B</sup>:null}{conSpell.includes(this.props.levelOne[i])?<sup>C</sup>:null}
 				</button>
 
 			);
@@ -46,7 +45,7 @@ export class SpellChoosing extends Component {
 
 		for (var j=0; j<this.props.levelTwo.length; j++) {
 			levelTwoArray.push(<button className="spell-buttons" key={"levelTwo"+j} onClick={this.handleClick}>
-				{this.props.levelTwo[j]}{twoBonus.includes(this.props.levelTwo[j])?<sup>B</sup>:null}{twoCon.includes(this.props.levelTwo[j])?<sup>C</sup>:null}
+				{this.props.levelTwo[j]}{bonusAction.includes(this.props.levelTwo[j])?<sup>B</sup>:null}{conSpell.includes(this.props.levelTwo[j])?<sup>C</sup>:null}
 				</button>
 
 			);
@@ -55,17 +54,18 @@ export class SpellChoosing extends Component {
 
 		return (
 			<div className={this.props.hide}>
-				<p>Choose {this.props.spellNumber} spells:</p>
+				<p>Choose {this.props.spellNumber} spells (click to add):</p>
 
 				<b>1<sup>st</sup> level spells:</b><br/>
-				<div style={{maxWidth:500}}>
+				<div style={{maxWidth:800}}>
 					{levelOneArray}
 				</div>
 
-				<b>2<sup>nd</sup> level spells:</b><br/>
-				<div style={{maxWidth:500}}>
+				{this.props.level > 2 &&
+				<span><b>2<sup>nd</sup> level spells:</b><br/>
+				<div style={{maxWidth:800}}>
 					{levelTwoArray}
-				</div>
+				</div></span>}
 			</div>
 		);
 	}
