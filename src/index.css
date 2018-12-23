@@ -20,3 +20,9 @@ code {
 .spell-buttons {
 	margin: 5px;
 }
+
+.blue {
+	color:#4dd2ff;
+	font-weight:bold;
+	font-size: 24px;
+}

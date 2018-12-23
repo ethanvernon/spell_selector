@@ -14,7 +14,7 @@ export class LevelChooser extends Component {
 
 	render() {
 		return (
-			<div className={this.props.hide}>
+			<div className={this.props.hide} style={{marginTop:20}}>
 				<span style={{fontSize:16, marginRight:10}}>Choose your level:</span>
 				<input 
 					style={{textAlign:'center'}}
