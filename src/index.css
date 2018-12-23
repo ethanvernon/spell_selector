@@ -24,5 +24,23 @@ code {
 .blue {
 	color:#4dd2ff;
 	font-weight:bold;
-	font-size: 24px;
+	font-size: 18px;
+}
+
+.center-button {
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.my-title {
+	text-align:center;
+}
+
+.choice-boxes {
+	text-align:right;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
 }

@@ -14,10 +14,10 @@ export class LevelChooser extends Component {
 
 	render() {
 		return (
-			<div className={this.props.hide} style={{marginTop:20}}>
-				<span style={{fontSize:16, marginRight:10}}>Choose your level:</span>
+			<div className={this.props.hide} style={{marginTop:20, width:350, marginLeft:'auto', marginRight:'auto'}}>
+				<span style={{fontSize:16, marginRight:10, textAlign:'left'}}>Choose your level:</span>
 				<input 
-					style={{textAlign:'center'}}
+					style={{textAlign:'center', display:'flex', float:'right', width:75}}
 		        	id="clericLevel"
 		        	type="number"
 		        	min="1"

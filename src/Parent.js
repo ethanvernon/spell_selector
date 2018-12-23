@@ -4,6 +4,7 @@ import {LevelChooser} from './LevelChooser';
 import {WisModChooser} from './WisModChooser';
 import {SelectionHeader} from './SelectionHeader';
 import {SpellChoosing} from './SpellChoosing';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export class Parent extends Component {
 
@@ -136,6 +137,24 @@ export class Parent extends Component {
 	render() {
 		return (
 			<div>
+
+				<h2 className='my-title'>Spell Selector</h2>
+
+				<div className='row'>
+
+				<div className='col-sm' style={{marginBottom:25}}>
+				<LevelChooser
+					onChange = {this.changeClericLevel}
+					level={this.state.clericLevel}
+					hide = {this.state.startScreenHide}/>
+
+				<WisModChooser
+					onChange = {this.changeWisMod}
+					wisMod={this.state.wisdomMod}
+					hide = {this.state.startScreenHide}/>
+				</div>
+
+				<div className='col-sm'>
 				<SelectionHeader
 					level={this.state.clericLevel}
 					levelOne={this.state.levelOneSlots}
@@ -146,16 +165,8 @@ export class Parent extends Component {
 					wisMod = {this.state.wisdomMod}
 					levelTwoAvail = {this.state.levelTwoAvail}
 					cantripsKnown = {this.state.cantripsKnown}/>
-
-				<LevelChooser
-					onChange = {this.changeClericLevel}
-					level={this.state.clericLevel}
-					hide = {this.state.startScreenHide}/>
-
-				<WisModChooser
-					onChange = {this.changeWisMod}
-					wisMod={this.state.wisdomMod}
-					hide = {this.state.startScreenHide}/>
+				</div>
+				</div>
 
 				<SpellChoosing
 					hide = {this.state.chooseScreenHide}
