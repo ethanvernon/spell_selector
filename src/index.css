@@ -14,7 +14,7 @@ code {
 }
 
 .hidden {
-	display:none;
+	display:none !important;
 }
 
 .spell-buttons {
@@ -44,4 +44,31 @@ code {
 
 input[type=number]::-webkit-inner-spin-button {
     opacity: 1
+}
+
+.center {
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom:10px;
+	font-size: 14px;
+}
+
+.spell-slot {
+	border: 1px white solid;
+	margin-right: 5px;
+	margin-left: 5px;
+	border-radius: 5px;
+	box-shadow: 1px 4px gray;
+}
+
+.spell-slot:hover {
+	cursor:pointer;
+}
+
+.spell-slot:active {
+  box-shadow: 0px 2px gray;
+  margin-top: 2px;
+  margin-bottom:-2px;
 }

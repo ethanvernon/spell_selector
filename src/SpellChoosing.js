@@ -12,6 +12,10 @@ export class SpellChoosing extends Component {
 	//converts spell to its base name if necessary and passes it to Parent.js' updateSpellChoiceNumber function
 	handleClick(e) {
 
+		if (this.props.spellNumber === 0) {
+			return null;
+		}
+
 		//combine all spells excluding domain spells into one array
 		let spells=this.props.levelOne.concat(this.props.levelTwo)
 		let spell=e.currentTarget.innerText;
@@ -26,21 +30,7 @@ export class SpellChoosing extends Component {
 		}
 	}
 
-	/*convertToBaseName(spell, spells) {
-		//remove any potential bonus action, concentration spell, or both markers
-		let sglSpell = spell.slice(0, -1);
-		let dblSpell = spell.slice(0, -2);
-
-		//if its marked as bonus action, concentration spell, or both, updates spell to base name
-		if (spells.includes(sglSpell)) {
-			spell = sglSpell;
-		} else if (spells.includes(dblSpell)) {
-			spell = dblSpell;
-		}
-
-		//passes base spell name to Parent.js' updateSpellChoiceNumber function
-		this.props.onClick(spell);
-	}*/
+	
 
 
 	render() {

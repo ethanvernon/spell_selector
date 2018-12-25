@@ -1,0 +1,41 @@
+import React, { Component } from 'react';
+import './App.css';
+
+export class CastingScreen extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(e) {
+		let level = e.currentTarget.getAttribute('level');
+
+		this.props.reduceNumber(level);
+	}
+
+	render() {
+		let thisClass = "center " + this.props.hide;
+
+		return (
+			<div className={thisClass}>
+				<p><span style={{fontSize:24, weight:'bold'}}>Adventuring screen</span><br/>
+				Click a spell slot to expend it</p>
+
+				<div className='row'>
+					<div className='col-sm spell-slot' onClick={this.handleClick} level="1">
+						<p style={{fontSize:14, weight:'bold', marginBottom:-3}}>1<sup>st</sup> Level</p>
+						<p style={{fontSize:9, weight:'bold', marginBottom:0}}>Spell Slot</p>
+						<p style={{fontSize:35, weight:'bold', lineHeight:'1.2em', marginBottom:0}}>{this.props.levelOne}</p>
+						<p style={{fontSize:10, weight:'bold', marginBottom:'.5em'}}>remaining</p>
+					</div>
+					<div className='col-sm spell-slot' onClick={this.handleClick} level="2">
+						<p style={{fontSize:14, weight:'bold', marginBottom:-3}}>2<sup>nd</sup> Level</p>
+						<p style={{fontSize:9, weight:'bold', marginBottom:0}}>Spell Slot</p>
+						<p style={{fontSize:35, weight:'bold', lineHeight:'1.2em', marginBottom:0}}>{this.props.levelTwo}</p>
+						<p style={{fontSize:10, weight:'bold', marginBottom:'.5em'}}>remaining</p>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}

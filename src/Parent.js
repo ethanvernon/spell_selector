@@ -6,6 +6,9 @@ import {SelectionHeader} from './SelectionHeader';
 import {SpellChoosing} from './SpellChoosing';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Chosen} from './Chosen';
+import {Begin} from './Begin';
+import {CastingScreen} from './CastingScreen';
+import {PreparedSpells} from './PreparedSpells';
 
 export class Parent extends Component {
 
@@ -32,6 +35,7 @@ export class Parent extends Component {
 	      	spellChoiceNumber: 6,
 	      	startScreenHide: "",
 	      	chooseScreenHide: "hidden",
+	      	castingScreenHide: "hidden",
 	      	domainSpellsFirst: ["Bless", "Cure Wounds"],
 	      	domainSpellsSecond: ["Lesser Restoration", "Spiritual Weapon"],
 	      	choseFirst: ["Bless", "Cure Wounds"],
@@ -46,6 +50,8 @@ export class Parent extends Component {
 	    this.updateSpellChoiceNumber = this.updateSpellChoiceNumber.bind(this);
 	    this.convertToBaseName = this.convertToBaseName.bind(this);
 	    this.removeChosen = this.removeChosen.bind(this);
+	    this.startCasting = this.startCasting.bind(this);
+	    this.spellWasCast = this.spellWasCast.bind(this);
 	}
 
 	//called by LevelChooser.js whenever cleric level input is changed
@@ -229,39 +235,81 @@ export class Parent extends Component {
 		}
 	}
 
+	startCasting() {
+		console.log("start casting");
+
+		//hides choose screen
+		this.setState({
+			chooseScreenHide: "hidden",
+			castingScreenHide: ""
+		})
+	}
+
+	spellWasCast(level) {
+		if (level == 1 && this.state.levelOneSlots > 0) {
+			let int = this.state.levelOneSlots - 1;
+			this.setState({
+				levelOneSlots: int
+			})
+		} else if (level == 2 && this.state.levelTwoSlots > 0) {
+			let int = this.state.levelTwoSlots - 1;
+			this.setState({
+				levelTwoSlots: int
+			})
+		}
+	}
+
 
 	render() {
+		let startScreenClass = 'row ' + this.state.startScreenHide;
+
 		return (
 			<div>
 
 				<h2 className='my-title'>Spell Selector</h2>
 
-				<div className='row'>
+				<Begin 
+					hide={this.state.chooseScreenHide}
+					handleClick={this.startCasting}/>
 
-				<div className='col-sm' style={{marginBottom:25}}>
-				<LevelChooser
-					onChange = {this.changeClericLevel}
-					level={this.state.clericLevel}
-					hide = {this.state.startScreenHide}/>
-
-				<WisModChooser
-					onChange = {this.changeWisMod}
-					wisMod={this.state.wisdomMod}
-					hide = {this.state.startScreenHide}/>
-				</div>
-
-				<div className='col-sm'>
-				<SelectionHeader
-					level={this.state.clericLevel}
+				<CastingScreen 
+					hide={this.state.castingScreenHide}
 					levelOne={this.state.levelOneSlots}
 					levelTwo={this.state.levelTwoSlots}
-					spellNumber={this.state.spellNumber}
-					handleClick = {this.hideForChoosing}
-					hide = {this.state.startScreenHide}
-					wisMod = {this.state.wisdomMod}
-					levelTwoAvail = {this.state.levelTwoAvail}
-					cantripsKnown = {this.state.cantripsKnown}/>
-				</div>
+					reduceNumber={this.spellWasCast}/>
+
+				<PreparedSpells 
+					hide={this.state.castingScreenHide}
+					levelOneSpells={this.state.choseFirst}
+					levelTwoSpells={this.state.choseSecond}/>
+
+				<div className={startScreenClass}>
+
+					<div className='col-sm' style={{marginBottom:25}}>
+						<LevelChooser
+							onChange = {this.changeClericLevel}
+							level={this.state.clericLevel}
+							hide = {this.state.startScreenHide}/>
+
+						<WisModChooser
+							onChange = {this.changeWisMod}
+							wisMod={this.state.wisdomMod}
+							hide = {this.state.startScreenHide}/>
+					</div>
+
+					<div className='col-sm'>
+						<SelectionHeader
+							level={this.state.clericLevel}
+							levelOne={this.state.levelOneSlots}
+							levelTwo={this.state.levelTwoSlots}
+							spellNumber={this.state.spellNumber}
+							handleClick = {this.hideForChoosing}
+							hide = {this.state.startScreenHide}
+							wisMod = {this.state.wisdomMod}
+							levelTwoAvail = {this.state.levelTwoAvail}
+							cantripsKnown = {this.state.cantripsKnown}/>
+						</div>
+
 				</div>
 
 				<Chosen 

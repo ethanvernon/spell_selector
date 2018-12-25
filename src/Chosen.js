@@ -66,7 +66,7 @@ export class Chosen extends Component {
 		return (
 
 			//only shows when "Prepare Now" has been clicked in SelectionHeader.js
-			<div className={this.props.hide} style={{border:"1px solid white", height:"8em"}}>
+			<div className={this.props.hide} style={{border:"1px solid white", minHeight:"8em"}}>
 				<p>Chosen (click to remove):</p>
 				{/*conditionally renders */}
 				{this.props.chosenOne.length > 0 && 				
