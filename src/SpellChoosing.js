@@ -5,7 +5,7 @@ export class SpellChoosing extends Component {
 	constructor(props) {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
-		this.convertToBaseName = this.convertToBaseName.bind(this);
+		//this.convertToBaseName = this.convertToBaseName.bind(this);
 	}
 
 	//function is called whenever a spell button is clicked on
@@ -20,11 +20,13 @@ export class SpellChoosing extends Component {
 		if (spells.includes(spell)) {			
 			this.props.onClick(spell);
 		} else{
-			this.convertToBaseName(spell, spells);
+			spell=this.props.cleanString(spell, spells);
+			//passes base spell name to Parent.js' updateSpellChoiceNumber function
+			this.props.onClick(spell);
 		}
 	}
 
-	convertToBaseName(spell, spells) {
+	/*convertToBaseName(spell, spells) {
 		//remove any potential bonus action, concentration spell, or both markers
 		let sglSpell = spell.slice(0, -1);
 		let dblSpell = spell.slice(0, -2);
@@ -38,7 +40,7 @@ export class SpellChoosing extends Component {
 
 		//passes base spell name to Parent.js' updateSpellChoiceNumber function
 		this.props.onClick(spell);
-	}
+	}*/
 
 
 	render() {

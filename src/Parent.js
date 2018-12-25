@@ -44,6 +44,7 @@ export class Parent extends Component {
 	    this.changeSpellNumber = this.changeSpellNumber.bind(this);
 	    this.hideForChoosing = this.hideForChoosing.bind(this);
 	    this.updateSpellChoiceNumber = this.updateSpellChoiceNumber.bind(this);
+	    this.convertToBaseName = this.convertToBaseName.bind(this);
 	}
 
 	//called by LevelChooser.js whenever cleric level input is changed
@@ -164,6 +165,22 @@ export class Parent extends Component {
 		}
 	}
 
+	//removes spell markers
+	convertToBaseName(spell, spells) {
+		//remove any potential bonus action, concentration spell, or both markers
+		let sglSpell = spell.slice(0, -1);
+		let dblSpell = spell.slice(0, -2);
+
+		//if its marked as bonus action, concentration spell, or both, updates spell to base name
+		if (spells.includes(sglSpell)) {
+			spell = sglSpell;
+		} else if (spells.includes(dblSpell)) {
+			spell = dblSpell;
+		}
+
+		return spell;
+	}
+
 
 	render() {
 		return (
@@ -213,7 +230,8 @@ export class Parent extends Component {
 					levelTwo = {this.state.secondLevelChoice}
 					spellNumber = {this.state.spellChoiceNumber}
 					onClick = {this.updateSpellChoiceNumber}
-					level={this.state.clericLevel}/>
+					level={this.state.clericLevel}
+					cleanString={this.convertToBaseName}/>
 
 			</div>
 			)
