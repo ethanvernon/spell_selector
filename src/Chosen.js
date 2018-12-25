@@ -37,7 +37,7 @@ export class Chosen extends Component {
 		//adds a D for domain spells
 		if (this.props.chosenOne.length) {
 			for (var i=0; i<this.props.chosenOne.length; i++) {
-				levelOneArray.push(<button className="spell-buttons" key={"levelOneChose"+i} onClick={this.handleClick}>
+				levelOneArray.push(<button className="spell-buttons no-select" key={"levelOneChose"+i} onClick={this.handleClick}>
 					{this.props.chosenOne[i]}
 					{bonusAction.includes(this.props.chosenOne[i])?<sup>B</sup>:null}
 					{conSpell.includes(this.props.chosenOne[i])?<sup>C</sup>:null}
@@ -52,7 +52,7 @@ export class Chosen extends Component {
 		//adds a D for domain spells
 		if (this.props.chosenTwo.length) {
 			for (i=0; i<this.props.chosenTwo.length; i++) {
-				levelTwoArray.push(<button className="spell-buttons" key={"levelTwoChose"+i} onClick={this.handleClick}>
+				levelTwoArray.push(<button className="spell-buttons no-select" key={"levelTwoChose"+i} onClick={this.handleClick}>
 					{this.props.chosenTwo[i]}
 					{bonusAction.includes(this.props.chosenTwo[i])?<sup>B</sup>:null}
 					{conSpell.includes(this.props.chosenTwo[i])?<sup>C</sup>:null}

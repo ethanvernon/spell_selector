@@ -14,7 +14,7 @@ export class CastingScreen extends Component {
 	}
 
 	render() {
-		let thisClass = "center " + this.props.hide;
+		let thisClass = "center no-select " + this.props.hide;
 
 		return (
 			<div className={thisClass}>

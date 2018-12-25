@@ -5,11 +5,11 @@ export class PreparedSpells extends Component {
 
 	render() {
 		return (
-			<div className={this.props.hide}>
+			<div className={this.props.hide} style={{maxWidth:600}}>
 				Prepared Spells:<br/>
 
-				Level 1: {this.props.levelOneSpells.join(', ')}<br/>
-				Level 2: {this.props.levelTwoSpells.join(', ')}
+				<p>1<sup>st</sup> Level: {this.props.levelOneSpells.join(', ')}</p>
+				<p>2<sup>nd</sup> Level: {this.props.levelTwoSpells.join(', ')}</p>
 			</div>
 		)
 	}

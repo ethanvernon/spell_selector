@@ -34,6 +34,7 @@ export class SpellChoosing extends Component {
 
 
 	render() {
+
 		let levelOneArray=[];
 		let levelTwoArray=[];
 
@@ -43,7 +44,7 @@ export class SpellChoosing extends Component {
 
 		//takes each first level spell and makes it into a button, plus adds a bonus action or concentration spell marker
 		for (var i=0; i<this.props.levelOne.length; i++) {
-			levelOneArray.push(<button className="spell-buttons" key={"levelOne"+i} onClick={this.handleClick}>
+			levelOneArray.push(<button className="no-select spell-buttons" key={"levelOne"+i} onClick={this.handleClick}>
 				{this.props.levelOne[i]}{bonusAction.includes(this.props.levelOne[i])?<sup>B</sup>:null}{conSpell.includes(this.props.levelOne[i])?<sup>C</sup>:null}
 				</button>
 
@@ -52,7 +53,7 @@ export class SpellChoosing extends Component {
 
 		//takes each second level spell and makes it into a button, plus adds a bonus action or concentration spell marker
 		for (var j=0; j<this.props.levelTwo.length; j++) {
-			levelTwoArray.push(<button className="spell-buttons" key={"levelTwo"+j} onClick={this.handleClick}>
+			levelTwoArray.push(<button className="no-select spell-buttons" key={"levelTwo"+j} onClick={this.handleClick}>
 				{this.props.levelTwo[j]}{bonusAction.includes(this.props.levelTwo[j])?<sup>B</sup>:null}{conSpell.includes(this.props.levelTwo[j])?<sup>C</sup>:null}
 				</button>
 
