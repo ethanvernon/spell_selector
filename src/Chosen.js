@@ -9,9 +9,6 @@ export class Chosen extends Component {
 
 	handleClick(e) {
 
-		//combine all spells excluding domain spells into one array
-		//let spells=this.props.levelOne.concat(this.props.levelTwo)
-
 		//get spell name with add-ons, remove add-ons
 		let spell=this.props.cleanString(e.currentTarget.innerText);
 
@@ -22,6 +19,7 @@ export class Chosen extends Component {
 
 		if (!domainSpells.includes(spell)) {
 			console.log("this is not a domain spell");
+			this.props.removeChosen(spell);
 		}
 	}
 

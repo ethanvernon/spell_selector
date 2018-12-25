@@ -45,6 +45,7 @@ export class Parent extends Component {
 	    this.hideForChoosing = this.hideForChoosing.bind(this);
 	    this.updateSpellChoiceNumber = this.updateSpellChoiceNumber.bind(this);
 	    this.convertToBaseName = this.convertToBaseName.bind(this);
+	    this.removeChosen = this.removeChosen.bind(this);
 	}
 
 	//called by LevelChooser.js whenever cleric level input is changed
@@ -183,6 +184,28 @@ export class Parent extends Component {
 		return spell;
 	}
 
+	//removes spell from Chosen spells
+	removeChosen(spell) {
+		let index1 = this.state.choseFirst.indexOf(spell);    // <-- Not supported in <IE9
+		let array1 = this.state.choseFirst;
+		let index2 = this.state.choseSecond.indexOf(spell);
+		let array2 = this.state.choseSecond;
+
+		if (index1 !== -1) {
+		    array1.splice(index1, 1);
+		    this.setState({
+		    	choseFirst: array1
+		    });
+		}
+
+		if (index2 !== -1) {
+			array2.splice(index2, 1);
+			this.setState({
+				choseSecond: array2
+			});
+		}
+	}
+
 
 	render() {
 		return (
@@ -224,7 +247,8 @@ export class Parent extends Component {
 					chosenTwo = {this.state.choseSecond}
 					domainSpellsFirst={this.state.domainSpellsFirst}
 					domainSpellsSecond={this.state.domainSpellsSecond}
-					cleanString={this.convertToBaseName}/>
+					cleanString={this.convertToBaseName}
+					removeChosen={this.removeChosen}/>
 
 				<SpellChoosing
 					hide = {this.state.chooseScreenHide}
