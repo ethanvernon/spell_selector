@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/spell_selector/static/js/runtime~main.4e84e2ef.js"
   },
   {
-    "revision": "7d4217b5985680cc5421",
-    "url": "/spell_selector/static/js/main.7d4217b5.chunk.js"
+    "revision": "c7e5e7c79f1899815421",
+    "url": "/spell_selector/static/js/main.c7e5e7c7.chunk.js"
   },
   {
     "revision": "6d840eb371c2ede97600",
     "url": "/spell_selector/static/js/1.6d840eb3.chunk.js"
   },
   {
-    "revision": "7d4217b5985680cc5421",
+    "revision": "c7e5e7c79f1899815421",
     "url": "/spell_selector/static/css/main.b03a1c34.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/spell_selector/static/css/1.45dbfbcd.chunk.css"
   },
   {
-    "revision": "98974b89c34d114ab1a9c8af7f4a35c2",
+    "revision": "2b4f01c56a3723241e0d900c8c55b448",
     "url": "/spell_selector/index.html"
   }
 ];
