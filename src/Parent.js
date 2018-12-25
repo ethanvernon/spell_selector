@@ -166,10 +166,12 @@ export class Parent extends Component {
 	}
 
 	//removes spell markers
-	convertToBaseName(spell, spells) {
+	convertToBaseName(spell) {
 		//remove any potential bonus action, concentration spell, or both markers
 		let sglSpell = spell.slice(0, -1);
 		let dblSpell = spell.slice(0, -2);
+
+		let spells = this.state.firstLevel.concat(this.state.secondLevel).concat(this.state.domainSpellsFirst).concat(this.state.domainSpellsSecond);
 
 		//if its marked as bonus action, concentration spell, or both, updates spell to base name
 		if (spells.includes(sglSpell)) {
@@ -221,7 +223,8 @@ export class Parent extends Component {
 					chosenOne = {this.state.choseFirst}
 					chosenTwo = {this.state.choseSecond}
 					domainSpellsFirst={this.state.domainSpellsFirst}
-					domainSpellsSecond={this.state.domainSpellsSecond}/>
+					domainSpellsSecond={this.state.domainSpellsSecond}
+					cleanString={this.convertToBaseName}/>
 
 				<SpellChoosing
 					hide = {this.state.chooseScreenHide}

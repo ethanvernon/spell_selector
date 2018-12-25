@@ -7,8 +7,22 @@ export class Chosen extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	handleClick() {
-		console.log("click detected");
+	handleClick(e) {
+
+		//combine all spells excluding domain spells into one array
+		//let spells=this.props.levelOne.concat(this.props.levelTwo)
+
+		//get spell name with add-ons, remove add-ons
+		let spell=this.props.cleanString(e.currentTarget.innerText);
+
+		//all domain spells in one array
+		let domainSpells=this.props.domainSpellsFirst.concat(this.props.domainSpellsSecond);
+		console.log(domainSpells);
+		console.log(spell);
+
+		if (!domainSpells.includes(spell)) {
+			console.log("this is not a domain spell");
+		}
 	}
 
 	render() {
@@ -21,7 +35,7 @@ export class Chosen extends Component {
 		'Enhance Ability', 'Hold Person', 'Locate Object', 'Silence'];
 		let domainSpell=this.props.domainSpellsFirst.concat(this.props.domainSpellsSecond);
 
-		//makes a button out of each spell just like in SpellChoosing.js
+		//makes a button out of each level 1 spell just like in SpellChoosing.js
 		//adds a D for domain spells
 		if (this.props.chosenOne.length) {
 			for (var i=0; i<this.props.chosenOne.length; i++) {
@@ -36,7 +50,7 @@ export class Chosen extends Component {
 			}
 		}
 
-		//makes a button out of each spell just like in SpellChoosing.js
+		//makes a button out of each level 2 spell just like in SpellChoosing.js
 		//adds a D for domain spells
 		if (this.props.chosenTwo.length) {
 			for (var i=0; i<this.props.chosenTwo.length; i++) {

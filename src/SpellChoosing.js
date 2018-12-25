@@ -20,7 +20,7 @@ export class SpellChoosing extends Component {
 		if (spells.includes(spell)) {			
 			this.props.onClick(spell);
 		} else{
-			spell=this.props.cleanString(spell, spells);
+			spell=this.props.cleanString(spell);
 			//passes base spell name to Parent.js' updateSpellChoiceNumber function
 			this.props.onClick(spell);
 		}
