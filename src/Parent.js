@@ -136,15 +136,19 @@ export class Parent extends Component {
 		let chosenArrOne = this.state.choseFirst;
 		let chosenArrTwo = this.state.choseSecond;
 
+		console.log(spell);
+		console.log(this.state.firstLevelChoice);
 		//checks if it is a level 1 spell or a level 2 spell
 		if (this.state.firstLevelChoice.includes(spell)) {
 			arr = this.state.firstLevelChoice;
 			chosenArrOne.push(spell);
 			match=1;
-		} else {
+		} else if (this.state.secondLevelChoice.includes(spell)) {
 			arr = this.state.secondLevelChoice;
 			chosenArrTwo.push(spell);
 			match=2;
+		} else {
+			console.log("error: spell doesn't match")
 		}
 
 		//removes the chosen spell from the choices
@@ -184,24 +188,43 @@ export class Parent extends Component {
 		return spell;
 	}
 
-	//removes spell from Chosen spells
+	//removes spell from chosefirst/chosesecond, adds back to appropriate levelchoice
 	removeChosen(spell) {
 		let index1 = this.state.choseFirst.indexOf(spell);    // <-- Not supported in <IE9
 		let array1 = this.state.choseFirst;
 		let index2 = this.state.choseSecond.indexOf(spell);
 		let array2 = this.state.choseSecond;
+		let removed = [];
+		let choiceNumber = this.state.spellChoiceNumber;
+
+		console.log(index1);
+		console.log(index2);
 
 		if (index1 !== -1) {
-		    array1.splice(index1, 1);
+		    removed = array1.splice(index1, 1);
+		    let choices = this.state.firstLevelChoice;
+		    choices.push(removed[0]);
+		    choices.sort();
+		    choiceNumber++;
+
 		    this.setState({
-		    	choseFirst: array1
+		    	choseFirst: array1,
+		    	firstLevelChoice: choices,
+		    	spellChoiceNumber: choiceNumber
 		    });
 		}
 
 		if (index2 !== -1) {
-			array2.splice(index2, 1);
+			removed = array2.splice(index2, 1);
+		    let choices = this.state.secondLevelChoice;
+		    choices.push(removed[0]);
+		    choices.sort();
+		    choiceNumber++;
+
 			this.setState({
-				choseSecond: array2
+				choseSecond: array2,
+		    	secondLevelChoice: choices,
+		    	spellChoiceNumber: choiceNumber
 			});
 		}
 	}

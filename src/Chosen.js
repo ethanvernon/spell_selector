@@ -51,7 +51,7 @@ export class Chosen extends Component {
 		//makes a button out of each level 2 spell just like in SpellChoosing.js
 		//adds a D for domain spells
 		if (this.props.chosenTwo.length) {
-			for (var i=0; i<this.props.chosenTwo.length; i++) {
+			for (i=0; i<this.props.chosenTwo.length; i++) {
 				levelTwoArray.push(<button className="spell-buttons" key={"levelTwoChose"+i} onClick={this.handleClick}>
 					{this.props.chosenTwo[i]}
 					{bonusAction.includes(this.props.chosenTwo[i])?<sup>B</sup>:null}
