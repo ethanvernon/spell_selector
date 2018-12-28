@@ -6,13 +6,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:#282c34 !important;
+  background-color:white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;  
   font-size: calc(10px + 2vmin);
-  color: white !important;
+  color: black;
+  padding: 10px;
 }
 
 code {
@@ -30,15 +31,14 @@ code {
 }
 
 .blue {
-	color:#4dd2ff;
+	color:#30b0db;
 	font-weight:bold;
 	font-size: 18px;
 }
 
 .center-button {
-	display: flex;
-	margin-left: auto;
-	margin-right: auto;
+	margin: auto;
+	display:block;
 }
 
 .my-title {
@@ -57,17 +57,24 @@ input[type=number]::-webkit-inner-spin-button {
 	text-align:center;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 20px;
-	margin-bottom:10px;
+	margin-top:10px;
+	margin-bottom:5px;
 	font-size: 14px;
 }
 
+.choose {
+	margin-top:15px;
+	font-weight:bold;
+	font-size:18px;
+}
+
 .spell-slot {
-	border: 1px white solid;
+	border: 1px black solid;
 	margin-right: 5px;
 	margin-left: 5px;
 	border-radius: 5px;
 	box-shadow: 1px 4px gray;
+	margin-bottom:10px;
 }
 
 .spell-slot:hover {
@@ -76,8 +83,10 @@ input[type=number]::-webkit-inner-spin-button {
 
 .spell-slot:active {
   box-shadow: 0px 2px gray;
+  margin-right: 4px;
+  margin-left: 6px;
   margin-top: 2px;
-  margin-bottom:-2px;
+  margin-bottom:8px;
 }
 
 .no-select {

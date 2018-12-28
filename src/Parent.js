@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import {LevelChooser} from './LevelChooser';
 import {WisModChooser} from './WisModChooser';
 import {SelectionHeader} from './SelectionHeader';
-import {SpellChoosing} from './SpellChoosing';
+import {SpellChoosing2} from './SpellChoosing2';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Chosen} from './Chosen';
 import {Begin} from './Begin';
@@ -285,7 +284,7 @@ export class Parent extends Component {
 
 				<div className={startScreenClass}>
 
-					<div className='col-sm' style={{marginBottom:25}}>
+					<div className='col-xs' style={{marginBottom:25}}>
 						<LevelChooser
 							onChange = {this.changeClericLevel}
 							level={this.state.clericLevel}
@@ -296,8 +295,10 @@ export class Parent extends Component {
 							wisMod={this.state.wisdomMod}
 							hide = {this.state.startScreenHide}/>
 					</div>
+				</div>
 
-					<div className='col-sm'>
+				<div className={this.state.startScreenHide}>
+					<div>
 						<SelectionHeader
 							level={this.state.clericLevel}
 							levelOne={this.state.levelOneSlots}
@@ -308,9 +309,12 @@ export class Parent extends Component {
 							wisMod = {this.state.wisdomMod}
 							levelTwoAvail = {this.state.levelTwoAvail}
 							cantripsKnown = {this.state.cantripsKnown}/>
-						</div>
-
+					</div>
 				</div>
+				
+
+				
+
 
 				<Chosen 
 					hide = {this.state.chooseScreenHide}
@@ -320,8 +324,9 @@ export class Parent extends Component {
 					domainSpellsSecond={this.state.domainSpellsSecond}
 					cleanString={this.convertToBaseName}
 					removeChosen={this.removeChosen}/>
+				
 
-				<SpellChoosing
+				<SpellChoosing2
 					hide = {this.state.chooseScreenHide}
 					cantrips = {this.state.myCantrips}
 					levelOne = {this.state.firstLevelChoice}

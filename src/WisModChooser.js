@@ -17,7 +17,7 @@ export class WisModChooser extends Component {
 		let myClass="row " + this.props.hide;
 
 		return (
-			<div className={myClass} style={{marginTop:20, maxWidth:350, marginLeft:'auto', marginRight:'auto'}}>
+			<div className={myClass} style={{marginTop:20, marginLeft:'auto', marginRight:'auto'}}>
 
 				<div className='col-xs' style={{fontSize:16, marginRight:10, textAlign:'left'}}>Choose your Wisdom modifier:</div>
 				<input 
