@@ -18,9 +18,8 @@ export class WisModChooser extends Component {
 		return (
 			<div className={this.props.hide} style={{marginLeft:'auto', marginRight:'auto'}}>
 
-				<div className='col-xs' style={{fontSize:16, fontWeight:'bold'}}>Wisdom modifier:</div>
+				<div style={{fontSize:16, fontWeight:'bold'}}>Wisdom modifier:</div>
 				<input 
-					className='col-xs'
 					style={{textAlign:'center', marginLeft:'auto', marginRight:'auto', width:75}}
 		        	id="wisMod"
 		        	type="number"

@@ -18,7 +18,7 @@ export class Chosen extends Component {
 						<b>Level One</b>
 						{this.props.chosenOne.map((val, i) => this.props.selectMaker(val, i, 'chosen'))}
 
-						{this.props.chosenTwo.length > 0 &&
+						{this.props.level > 2 &&
 							<div>
 							<b>Level Two</b>
 							{this.props.chosenTwo.map((val, i) => this.props.selectMaker(val, i, 'chosen'))}

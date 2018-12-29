@@ -356,6 +356,7 @@ export class Parent extends Component {
 					hide = {this.state.chooseScreenHide}
 					chosenOne = {this.state.choseFirst}
 					chosenTwo = {this.state.choseSecond}
+					level = {this.state.clericLevel}
 					domain={this.state.domainSpells}
 					bonus={this.state.bonusAction}
 					conc={this.state.concSpell}

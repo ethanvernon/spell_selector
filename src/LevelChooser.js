@@ -17,9 +17,8 @@ export class LevelChooser extends Component {
 
 		return (
 			<div className={this.props.hide} style={{marginLeft:'auto', marginRight:'auto', marginBottom:10}}>
-				<div className='col-xs' style={{fontSize:16, fontWeight:'bold'}}>Cleric level:</div>
-				<input
-					className='col-xs' 
+				<div style={{fontSize:16, fontWeight:'bold'}}>Cleric level:</div>
+				<input 
 					style={{textAlign:'center', marginLeft:'auto', marginRight:'auto', width:75}}
 		        	id="clericLevel"
 		        	type="number"
