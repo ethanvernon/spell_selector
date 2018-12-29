@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import {LevelChooser} from './LevelChooser';
 import {WisModChooser} from './WisModChooser';
 import {PrepareButton} from './PrepareButton';
-import {SpellChoosing2} from './SpellChoosing2';
+import {SpellChoosing} from './SpellChoosing';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Chosen} from './Chosen';
 import {Begin} from './Begin';
 import {CastingScreen} from './CastingScreen';
 import {PreparedSpells} from './PreparedSpells';
+import {ChoicesLeft} from './ChoicesLeft';
 
 export class Parent extends Component {
 
@@ -350,32 +351,24 @@ export class Parent extends Component {
 				<div className={this.state.startScreenHide}>
 					<PrepareButton
 						handleClick = {this.hideForChoosing}/>
-				</div>		
+				</div>
 
 				<Chosen 
 					hide = {this.state.chooseScreenHide}
 					chosenOne = {this.state.choseFirst}
 					chosenTwo = {this.state.choseSecond}
 					level = {this.state.clericLevel}
-					domain={this.state.domainSpells}
-					bonus={this.state.bonusAction}
-					conc={this.state.concSpell}
-					cleanString={this.convertToBaseName}
-					removeChosen={this.removeChosen}
 					selectMaker={this.selectMaker}/>
 
-			
-				
-
-				<SpellChoosing2
+				<ChoicesLeft 
 					hide = {this.state.chooseScreenHide}
-					cantrips = {this.state.myCantrips}
+					spellNumber = {this.state.spellChoiceNumber}/>
+
+				<SpellChoosing
+					hide = {this.state.chooseScreenHide}
 					levelOne = {this.state.firstLevelChoice}
 					levelTwo = {this.state.secondLevelChoice}
-					spellNumber = {this.state.spellChoiceNumber}
-					onClick = {this.updateSpellChoiceNumber}
 					level={this.state.clericLevel}
-					cleanString={this.convertToBaseName}
 					selectMaker={this.selectMaker}/>
 
 			</div>
