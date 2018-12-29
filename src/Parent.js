@@ -15,15 +15,19 @@ export class Parent extends Component {
 	    super(props);
 
 	    this.state = {
-	    	cantrips: 		['Guidance', 'Light', 'Mending', 'Resistance', 'Sacred Flame', 'Spare the Dying', 'Thaumaturgy'],	    	
-	     	firstLevel: 	['Bane', 'Command', 'Create or Destroy Water', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
-	      					'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
-	      	secondLevel: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 'Lesser Restoration', 
-	      					'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
+	    	cantrips: 			['Guidance', 'Light', 'Mending', 'Resistance', 'Sacred Flame', 'Spare the Dying', 'Thaumaturgy'],	    	
+	     	firstLevel: 		['Bane', 'Command', 'Create or Destroy Water', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
+	      						'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
+	      	secondLevel: 		['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 'Lesser Restoration', 
+	      						'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Spiritual Weapon', 'Warding Bond', 'Zone of Truth'],
 	      	firstLevelChoice: 	['Bane', 'Command', 'Create or Destroy Water', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Guiding Bolt', 'Healing Word', 
 	      						'Inflict Wounds', 'Protection from Evil and Good', 'Purify Food and Drink', 'Sanctuary', 'Shield of Faith'],
 	      	secondLevelChoice: 	['Aid', 'Augury', 'Blindness/Deafness', 'Calm Emotions', 'Continual Flame', 'Enhance Ability', 'Find Traps', 'Gentle Repose', 'Hold Person', 
 	      						'Locate Object', 'Prayer of Healing', 'Protection from Poison', 'Silence', 'Warding Bond', 'Zone of Truth'],
+	      	bonus: 				['Healing Word', 'Sanctuary', 'Shield of Faith', 'Spiritual Weapon'],
+			conc: 				['Bane', 'Bless', 'Detect Evil and Good', 'Detect Magic', 'Detect Poison and Disease', 'Protection from Evil and Good', 'Shield of Faith', 'Calm Emotions', 
+								'Enhance Ability', 'Hold Person', 'Locate Object', 'Silence'],
+			domain: 			["Bless", "Cure Wounds", "Lesser Restoration", "Spiritual Weapon"],
 	      	clericLevel: 3,
 	      	cantripsKnown: 3,
 	      	levelOneSlots: 4,
@@ -51,6 +55,8 @@ export class Parent extends Component {
 	    this.removeChosen = this.removeChosen.bind(this);
 	    this.startCasting = this.startCasting.bind(this);
 	    this.spellWasCast = this.spellWasCast.bind(this);
+	    this.selectMaker = this.selectMaker.bind(this);
+	    this.handleClick = this.handleClick.bind(this);
 	}
 
 	//called by LevelChooser.js whenever cleric level input is changed
@@ -143,14 +149,17 @@ export class Parent extends Component {
 
 		console.log(spell);
 		console.log(this.state.firstLevelChoice);
+
 		//checks if it is a level 1 spell or a level 2 spell
 		if (this.state.firstLevelChoice.includes(spell)) {
 			arr = this.state.firstLevelChoice;
 			chosenArrOne.push(spell);
+			chosenArrOne.sort();
 			match=1;
 		} else if (this.state.secondLevelChoice.includes(spell)) {
 			arr = this.state.secondLevelChoice;
 			chosenArrTwo.push(spell);
+			chosenArrTwo.sort();
 			match=2;
 		} else {
 			console.log("error: spell doesn't match")
@@ -193,7 +202,7 @@ export class Parent extends Component {
 		return spell;
 	}
 
-	//removes spell from chosefirst/chosesecond, adds back to appropriate levelchoice
+	//removes spell adds back to appropriate levelchoice
 	removeChosen(spell) {
 		let index1 = this.state.choseFirst.indexOf(spell);    // <-- Not supported in <IE9
 		let array1 = this.state.choseFirst;
@@ -234,6 +243,7 @@ export class Parent extends Component {
 		}
 	}
 
+	//hides choose spell screen when begin is clicked
 	startCasting() {
 		console.log("start casting");
 
@@ -244,6 +254,7 @@ export class Parent extends Component {
 		})
 	}
 
+	//decreases spell slots remaining when clicked
 	spellWasCast(level) {
 		if (level == 1 && this.state.levelOneSlots > 0) {
 			let int = this.state.levelOneSlots - 1;
@@ -255,6 +266,46 @@ export class Parent extends Component {
 			this.setState({
 				levelTwoSlots: int
 			})
+		}
+	}
+
+	//customer select multiple box due to mobile Safari constraints
+	selectMaker(val, i, type) {
+  		let bonus=this.state.bonus.includes(val);
+  		let domain=this.state.domain.includes(val);
+  		let conc=this.state.conc.includes(val);
+
+  		return(
+  			<div key={val} className='selectable' onClick={this.handleClick} val={val} data={type} style={{paddingLeft:18, width:'100%'}}>
+  			{val}
+  			{bonus||conc||domain?' (':null}
+			{domain?'D':null}
+			{bonus?'B':null}
+			{conc?'C':null}
+			{bonus||conc||domain?')':null}
+			</div>
+  		)
+  	}
+
+  	//removes spell from chosen spells if its not a domain spell
+  	handleClick(e) {
+
+		//get spell name with add-ons, remove add-ons
+		let spell=e.currentTarget.getAttribute('val');
+		let calledFrom=e.currentTarget.getAttribute('data');
+
+		//testing
+		console.log(spell);
+		console.log('called from a ' + e.currentTarget.getAttribute('data'));
+
+		if (!this.state.domain.includes(spell) && calledFrom=='chosen') {
+			console.log("this is not a domain spell");
+			this.removeChosen(spell);
+		}
+
+		if (!this.state.spellChoiceNumber == 0 && calledFrom=='choice') {
+			console.log("choice");
+			this.updateSpellChoiceNumber(spell);
 		}
 	}
 
@@ -310,20 +361,18 @@ export class Parent extends Component {
 							levelTwoAvail = {this.state.levelTwoAvail}
 							cantripsKnown = {this.state.cantripsKnown}/>
 					</div>
-				</div>
-				
-
-				
-
+				</div>		
 
 				<Chosen 
 					hide = {this.state.chooseScreenHide}
 					chosenOne = {this.state.choseFirst}
 					chosenTwo = {this.state.choseSecond}
-					domainSpellsFirst={this.state.domainSpellsFirst}
-					domainSpellsSecond={this.state.domainSpellsSecond}
+					domain={this.state.domainSpells}
+					bonus={this.state.bonusAction}
+					conc={this.state.concSpell}
 					cleanString={this.convertToBaseName}
-					removeChosen={this.removeChosen}/>
+					removeChosen={this.removeChosen}
+					selectMaker={this.selectMaker}/>
 				
 
 				<SpellChoosing2
@@ -334,7 +383,8 @@ export class Parent extends Component {
 					spellNumber = {this.state.spellChoiceNumber}
 					onClick = {this.updateSpellChoiceNumber}
 					level={this.state.clericLevel}
-					cleanString={this.convertToBaseName}/>
+					cleanString={this.convertToBaseName}
+					selectMaker={this.selectMaker}/>
 
 			</div>
 			)
