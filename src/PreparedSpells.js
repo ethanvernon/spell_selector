@@ -8,7 +8,7 @@ export class PreparedSpells extends Component {
 
 		return (
 			<div className={multiClass}>
-				Prepared Spells:<br/>
+				Prepared Spells (click for description):<br/>
 
 
 				<div className="my-custom-select">

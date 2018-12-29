@@ -7,7 +7,7 @@ export class Begin extends Component {
 		let doubleClass = "center " + this.props.hide;
 
 		return (
-			<div className={doubleClass}>
+			<div className={doubleClass} style={{marginBottom:15}}>
 				<button onClick={this.props.handleClick}>
 				Begin Adventuring
 				</button>

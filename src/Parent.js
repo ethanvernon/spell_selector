@@ -9,6 +9,7 @@ import {Begin} from './Begin';
 import {CastingScreen} from './CastingScreen';
 import {PreparedSpells} from './PreparedSpells';
 import {ChoicesLeft} from './ChoicesLeft';
+import {SpellInfo} from './SpellInfo';
 
 export class Parent extends Component {
 
@@ -43,7 +44,8 @@ export class Parent extends Component {
 	      	domainSpellsFirst: ["Bless", "Cure Wounds"],
 	      	domainSpellsSecond: ["Lesser Restoration", "Spiritual Weapon"],
 	      	choseFirst: ["Bless", "Cure Wounds"],
-	      	choseSecond: ["Lesser Restoration", "Spiritual Weapon"]
+	      	choseSecond: ["Lesser Restoration", "Spiritual Weapon"],
+	      	activeSpell: {}
 	    };
 
 	    this.changeClericLevel = this.changeClericLevel.bind(this);
@@ -58,6 +60,8 @@ export class Parent extends Component {
 	    this.spellWasCast = this.spellWasCast.bind(this);
 	    this.selectMaker = this.selectMaker.bind(this);
 	    this.handleClick = this.handleClick.bind(this);
+	    this.getSpellUrl = this.getSpellUrl.bind(this);
+	    this.getSpellData = this.getSpellData.bind(this);
 	}
 
 	//called by LevelChooser.js whenever cleric level input is changed
@@ -288,10 +292,10 @@ export class Parent extends Component {
   		)
   	}
 
-  	//removes spell from chosen spells if its not a domain spell
+  	//handles various instances when a spell is clicked on
   	handleClick(e) {
 
-		//get spell name with add-ons, remove add-ons
+		//get spell name and source
 		let spell=e.currentTarget.getAttribute('val');
 		let calledFrom=e.currentTarget.getAttribute('data');
 
@@ -299,21 +303,28 @@ export class Parent extends Component {
 		console.log(spell);
 		console.log('called from a ' + e.currentTarget.getAttribute('data'));
 
+		//if from chosen spells list on prepare page and not a domain spell
 		if (!this.state.domain.includes(spell) && calledFrom=='chosen') {
 			console.log("this is not a domain spell");
 			this.removeChosen(spell);
 		}
 
+		//if from spell choices on prepare page and still have choices left
 		if (!this.state.spellChoiceNumber == 0 && calledFrom=='choice') {
 			console.log("choice");
 			this.updateSpellChoiceNumber(spell);
 		}
+
+		//if from prepared spells on casting page
+		if (calledFrom=='prep') {
+			this.getSpellUrl(spell);
+		}
 	}
 
-	//passes spell name to getSpellUrl()
+	/*passes spell name to getSpellUrl() for testing
 	componentDidMount() {
-		this.getSpellUrl(this.state.firstLevel[6]);		
-	}
+		this.getSpellUrl(this.state.secondLevel[0]);		
+	}*/
 
 	//takes spell name gets spell url from API
 	getSpellUrl(name) {
@@ -326,24 +337,45 @@ export class Parent extends Component {
 		}
 	}
 
-	//takes spell URL and gets data from API
+	//takes spell URL and gets data from API, saves to an object
 	getSpellData(url) {
 		let Http = new XMLHttpRequest();
+		let data={};
 		Http.open("GET", url);
 		Http.send();
 		Http.onreadystatechange=(e)=>{
-		console.log(JSON.parse(Http.responseText).name);		
-		console.log(JSON.parse(Http.responseText).casting_time);
-		console.log(JSON.parse(Http.responseText).range);
-		console.log(JSON.parse(Http.responseText).components);
-		console.log(JSON.parse(Http.responseText).concentration);
-		console.log(JSON.parse(Http.responseText).duration);
-		console.log(JSON.parse(Http.responseText).desc[0]);
-		console.log(JSON.parse(Http.responseText).high_level);
-		}
+			/*console.log(JSON.parse(Http.responseText).name);		
+			console.log(JSON.parse(Http.responseText).casting_time);
+			console.log(JSON.parse(Http.responseText).range);
+			console.log(JSON.parse(Http.responseText).components);
+			console.log(JSON.parse(Http.responseText).concentration);
+			console.log(JSON.parse(Http.responseText).duration;
+			console.log(JSON.parse(Http.responseText).desc[0]);			
+			console.log(JSON.parse(Http.responseText).higher_level);*/
+			console.log(JSON.parse(Http.responseText));
+
+			data = {
+				name: JSON.parse(Http.responseText).name,
+				level: JSON.parse(Http.responseText).level,
+				school: JSON.parse(Http.responseText).school.name,
+				casting_time: JSON.parse(Http.responseText).casting_time,
+				range: JSON.parse(Http.responseText).range,
+				components: JSON.parse(Http.responseText).components,
+				concentration: JSON.parse(Http.responseText).concentration,
+				duration: JSON.parse(Http.responseText).duration,
+				desc: JSON.parse(Http.responseText).desc[0].replace(/â€™/g, "'"),
+				high_level: JSON.parse(Http.responseText).higher_level
+			}
+
+		this.setActiveSpell(data);
+		}		
 	}
 
-
+	setActiveSpell(data) {
+		this.setState({
+			activeSpell: data
+		});
+	}
 
 
 	render() {
@@ -367,7 +399,17 @@ export class Parent extends Component {
 					hide={this.state.castingScreenHide}
 					levelOneSpells={this.state.choseFirst}
 					levelTwoSpells={this.state.choseSecond}
-					selectMaker={this.selectMaker}/>
+					selectMaker={this.selectMaker}
+					level={this.state.clericLevel}/>
+
+				{ this.state.castingScreenHide==='' &&
+				<SpellInfo 
+					hide={this.state.castingScreenHide}
+					spell={this.state.activeSpell}
+					levelOneSpells={this.state.choseFirst}
+					getDesc={this.getSpellUrl}/>
+				}
+				
 
 				<div className={this.state.startScreenHide}>
 
