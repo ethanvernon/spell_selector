@@ -4,12 +4,24 @@ import './App.css';
 export class PreparedSpells extends Component {
 
 	render() {
+		let multiClass = "prep-label " + this.props.hide;
+
 		return (
-			<div className={this.props.hide} style={{maxWidth:600}}>
+			<div className={multiClass}>
 				Prepared Spells:<br/>
 
-				<p>1<sup>st</sup> Level: {this.props.levelOneSpells.join(', ')}</p>
-				<p>2<sup>nd</sup> Level: {this.props.levelTwoSpells.join(', ')}</p>
+
+				<div className="my-custom-select">
+					<b>Level One</b>
+					{this.props.levelOneSpells.map((val, i) => this.props.selectMaker(val, i, 'prep'))}
+
+					{this.props.level > 2 &&
+						<div>
+						<b>Level Two</b>
+						{this.props.levelTwoSpells.map((val, i) => this.props.selectMaker(val, i, 'prep'))}
+						</div>
+					}
+				</div>
 			</div>
 		)
 	}

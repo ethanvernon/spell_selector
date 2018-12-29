@@ -42,6 +42,10 @@ code {
 	border-color: lightblue;
 }
 
+.selectable {
+	font-weight:normal;
+}
+
 .selectable:active {
 	background-color:lightblue;
 }
@@ -74,7 +78,6 @@ code {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top:10px;
-	margin-bottom:10px;
 	font-size: 14px;
 }
 
@@ -84,13 +87,23 @@ code {
 	font-size:18px;
 }
 
+.prep-label {
+	font-weight:bold;
+}
+
+.spell-slot-container {
+	text-align:middle;
+}
+
 .spell-slot {
 	border: 1px black solid;
-	margin-right: 5px;
-	margin-left: 5px;
 	border-radius: 5px;
 	box-shadow: 1px 4px gray;
-	margin-bottom:10px;
+	max-width:200px;
+	height:88px;
+	margin-top: 22px;
+	margin-bottom:20px;
+	margin-right:5px;
 }
 
 .spell-slot:hover {
@@ -99,10 +112,8 @@ code {
 
 .spell-slot:active {
   box-shadow: 0px 2px gray;
-  margin-right: 4px;
-  margin-left: 6px;
-  margin-top: 2px;
-  margin-bottom:8px;
+  margin-top: 24px;
+  margin-bottom: 18px;
 }
 
 .no-select {
@@ -111,3 +122,15 @@ code {
 	-ms-user-select: none; /* IE10+ */
 }
 
+@media(max-width:575px){
+	.spell-slot{
+    	margin-right:auto;
+    	margin-left:auto; 
+		margin-top: 10px;
+		margin-bottom:5px; 
+    }
+	.spell-slot:active{
+		margin-top: 12px;
+		margin-bottom:3px; 
+    }
+}

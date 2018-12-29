@@ -18,19 +18,19 @@ export class CastingScreen extends Component {
 
 		return (
 			<div className={thisClass}>
-				<p>Click a spell slot to expend it</p>
+				<span>Click a spell slot to expend it</span>
 
-				<div className='row'>
+				<div className='row spell-slot-container'>
 					<div className='col-sm spell-slot' onTouchStart="" onClick={this.handleClick} level="1">
 						<p style={{fontSize:14, weight:'bold', marginBottom:-3}}>1<sup>st</sup> Level</p>
 						<p style={{fontSize:9, weight:'bold', marginBottom:0}}>Spell Slot</p>
-						<p style={{fontSize:35, weight:'bold', lineHeight:'1.2em', marginBottom:0}}>{this.props.levelOne}</p>
+						<p style={{fontSize:35, weight:'bold', lineHeight:'1em', marginBottom:0}}>{this.props.levelOne}</p>
 						<p style={{fontSize:10, weight:'bold', marginBottom:'.5em'}}>remaining</p>
 					</div>
 					<div className='col-sm spell-slot' ontouchstart="" onClick={this.handleClick} level="2">
 						<p style={{fontSize:14, weight:'bold', marginBottom:-3}}>2<sup>nd</sup> Level</p>
 						<p style={{fontSize:9, weight:'bold', marginBottom:0}}>Spell Slot</p>
-						<p style={{fontSize:35, weight:'bold', lineHeight:'1.2em', marginBottom:0}}>{this.props.levelTwo}</p>
+						<p style={{fontSize:35, weight:'bold', lineHeight:'1em', marginBottom:0}}>{this.props.levelTwo}</p>
 						<p style={{fontSize:10, weight:'bold', marginBottom:'.5em'}}>remaining</p>
 					</div>
 				</div>

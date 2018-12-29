@@ -366,7 +366,8 @@ export class Parent extends Component {
 				<PreparedSpells 
 					hide={this.state.castingScreenHide}
 					levelOneSpells={this.state.choseFirst}
-					levelTwoSpells={this.state.choseSecond}/>
+					levelTwoSpells={this.state.choseSecond}
+					selectMaker={this.selectMaker}/>
 
 				<div className={this.state.startScreenHide}>
 
