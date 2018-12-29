@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 export class SpellChoosing extends Component {
-	constructor(props) {
-		super(props);
-		//this.convertToBaseName = this.convertToBaseName.bind(this);
-	}
 
 	render() {
 

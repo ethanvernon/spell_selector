@@ -15,7 +15,7 @@ export class PrepareButton extends Component {
 
 	render() {
 		return (
-			<button onClick={this.handleClick}>Prepare now</button>
+			<button className={this.props.hide} onClick={this.handleClick}>Prepare now</button>
 		)
 	}
 

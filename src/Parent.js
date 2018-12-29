@@ -310,6 +310,41 @@ export class Parent extends Component {
 		}
 	}
 
+	//passes spell name to getSpellUrl()
+	componentDidMount() {
+		this.getSpellUrl(this.state.firstLevel[6]);		
+	}
+
+	//takes spell name gets spell url from API
+	getSpellUrl(name) {
+		let Http = new XMLHttpRequest();
+		let url='http://www.dnd5eapi.co/api/spells/?name='+ name;
+		Http.open("GET", url);
+		Http.send();
+		Http.onreadystatechange=(e)=>{
+			this.getSpellData(JSON.parse(Http.responseText).results[0].url);
+		}
+	}
+
+	//takes spell URL and gets data from API
+	getSpellData(url) {
+		let Http = new XMLHttpRequest();
+		Http.open("GET", url);
+		Http.send();
+		Http.onreadystatechange=(e)=>{
+		console.log(JSON.parse(Http.responseText).name);		
+		console.log(JSON.parse(Http.responseText).casting_time);
+		console.log(JSON.parse(Http.responseText).range);
+		console.log(JSON.parse(Http.responseText).components);
+		console.log(JSON.parse(Http.responseText).concentration);
+		console.log(JSON.parse(Http.responseText).duration);
+		console.log(JSON.parse(Http.responseText).desc[0]);
+		console.log(JSON.parse(Http.responseText).high_level);
+		}
+	}
+
+
+
 
 	render() {
 
@@ -348,10 +383,9 @@ export class Parent extends Component {
 					</div>
 				</div>
 
-				<div className={this.state.startScreenHide}>
-					<PrepareButton
-						handleClick = {this.hideForChoosing}/>
-				</div>
+				<PrepareButton
+					handleClick = {this.hideForChoosing}
+					hide={this.state.startScreenHide}/>
 
 				<Chosen 
 					hide = {this.state.chooseScreenHide}
