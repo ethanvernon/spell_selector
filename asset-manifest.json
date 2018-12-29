@@ -1,15 +1,15 @@
 {
-  "main.css": "/spell_selector/static/css/main.15b45421.chunk.css",
-  "main.js": "/spell_selector/static/js/main.aa50994e.chunk.js",
-  "main.js.map": "/spell_selector/static/js/main.aa50994e.chunk.js.map",
+  "main.css": "/spell_selector/static/css/main.00d84064.chunk.css",
+  "main.js": "/spell_selector/static/js/main.8adc16f6.chunk.js",
+  "main.js.map": "/spell_selector/static/js/main.8adc16f6.chunk.js.map",
   "static/css/1.45dbfbcd.chunk.css": "/spell_selector/static/css/1.45dbfbcd.chunk.css",
   "static/js/1.ac5a6d4e.chunk.js": "/spell_selector/static/js/1.ac5a6d4e.chunk.js",
   "static/js/1.ac5a6d4e.chunk.js.map": "/spell_selector/static/js/1.ac5a6d4e.chunk.js.map",
   "runtime~main.js": "/spell_selector/static/js/runtime~main.4e84e2ef.js",
   "runtime~main.js.map": "/spell_selector/static/js/runtime~main.4e84e2ef.js.map",
+  "static/css/main.00d84064.chunk.css.map": "/spell_selector/static/css/main.00d84064.chunk.css.map",
   "static/css/1.45dbfbcd.chunk.css.map": "/spell_selector/static/css/1.45dbfbcd.chunk.css.map",
-  "static/css/main.15b45421.chunk.css.map": "/spell_selector/static/css/main.15b45421.chunk.css.map",
   "index.html": "/spell_selector/index.html",
-  "precache-manifest.c882ce3258635fa5bcd7ea9a1c18aa97.js": "/spell_selector/precache-manifest.c882ce3258635fa5bcd7ea9a1c18aa97.js",
+  "precache-manifest.83bcf74d03d4c86b18d3f26887339e41.js": "/spell_selector/precache-manifest.83bcf74d03d4c86b18d3f26887339e41.js",
   "service-worker.js": "/spell_selector/service-worker.js"
 }
