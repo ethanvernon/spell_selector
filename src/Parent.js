@@ -307,12 +307,20 @@ export class Parent extends Component {
 		if (!this.state.domain.includes(spell) && calledFrom=='chosen') {
 			console.log("this is not a domain spell");
 			this.removeChosen(spell);
+			this.getSpellUrl(spell);
+		} else if (this.state.domain.includes(spell) && calledFrom=='chosen') {
+			console.log("this is a domain spell");
+			this.getSpellUrl(spell);
 		}
 
 		//if from spell choices on prepare page and still have choices left
 		if (!this.state.spellChoiceNumber == 0 && calledFrom=='choice') {
 			console.log("choice");
 			this.updateSpellChoiceNumber(spell);
+			this.getSpellUrl(spell);
+		} else if (this.state.spellChoiceNumber == 0 && calledFrom=='choice') {
+			console.log("choice");
+			this.getSpellUrl(spell);
 		}
 
 		//if from prepared spells on casting page
@@ -447,6 +455,14 @@ export class Parent extends Component {
 					levelTwo = {this.state.secondLevelChoice}
 					level={this.state.clericLevel}
 					selectMaker={this.selectMaker}/>
+
+				{ this.state.chooseScreenHide==='' &&
+				<SpellInfo 
+					hide={this.state.chooseScreenHide}
+					spell={this.state.activeSpell}
+					levelOneSpells={this.state.choseFirst}
+					getDesc={this.getSpellUrl}/>
+				}
 
 			</div>
 			)

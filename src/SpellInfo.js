@@ -17,7 +17,8 @@ export class SpellInfo extends Component {
 
 		return (
 
-		<div id='spell-info-box' className={this.props.hide} style={{marginTop:20, maxWidth:300, height:130, border:'1px solid lightgray', padding:2, overflowY:'scroll', textAlign:'left'}}>			
+		<div style={{marginTop:20}}><b><span className="choose">Spell description:</span></b>
+		<div id='spell-info-box' className={this.props.hide} style={{maxWidth:350, height:200, border:'1px solid lightgray', padding:2, overflowY:'scroll', textAlign:'left'}}>			
 			<b style={{fontSize:26, letterSpacing:1, lineHeight:'1em'}}>{this.props.spell.name}</b><br/>
 			<i>Level {this.props.spell.level} {this.props.spell.school}</i><br/>
 			<b>Casting Time:</b> {this.props.spell.casting_time}<br/>
@@ -31,7 +32,7 @@ export class SpellInfo extends Component {
 			<b>Higher level:</b> {this.props.spell.high_level?this.props.spell.high_level[0]:'None'}<br/><br/>
 
 
-		</div>
+		</div></div>
 		);
 	}
 
