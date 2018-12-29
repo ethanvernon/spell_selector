@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import {ChoicesLeft} from './ChoicesLeft';
 
 export class SpellChoosing2 extends Component {
 	constructor(props) {
@@ -45,8 +46,8 @@ export class SpellChoosing2 extends Component {
 			//this won't show until "prepare now" button is clicked in SelectionHeader.js
 			<div className={this.props.hide} style={{textAlign:'center'}}>
 
-				{/*Number of spells gets updated each time a spell is clicked*/}
-				<div className="choose">Choose <span className='blue'>{this.props.spellNumber}</span> (click to add)</div>
+				<ChoicesLeft 
+					spellNumber = {this.props.spellNumber}/>
 
 
 				<div className="my-custom-select">

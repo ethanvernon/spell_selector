@@ -14,11 +14,10 @@ export class LevelChooser extends Component {
 
 
 	render() {
-		let myClass="row " + this.props.hide;
 
 		return (
-			<div className={myClass} style={{marginTop:20, marginLeft:'auto', marginRight:'auto'}}>
-				<div className='col-xs' style={{fontSize:16, marginRight:10, textAlign:'left'}}>Choose your level:</div>
+			<div className={this.props.hide} style={{marginLeft:'auto', marginRight:'auto', marginBottom:10}}>
+				<div className='col-xs' style={{fontSize:16, fontWeight:'bold'}}>Cleric level:</div>
 				<input
 					className='col-xs' 
 					style={{textAlign:'center', marginLeft:'auto', marginRight:'auto', width:75}}

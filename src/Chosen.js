@@ -11,9 +11,9 @@ export class Chosen extends Component {
 		return (
 
 			//only shows when "Prepare Now" has been clicked in SelectionHeader.js
-			<div className={this.props.hide} style={{border:"1px solid white", minHeight:"8em"}}>
+			<div className={this.props.hide}>
 				
-					<b><span className="choose">Chosen spells:</span></b><br/>
+					<b><span className="choose">Chosen (click to remove):</span></b><br/>
 					<div className="my-custom-select">
 						<b>Level One</b>
 						{this.props.chosenOne.map((val, i) => this.props.selectMaker(val, i, 'chosen'))}

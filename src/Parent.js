@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {LevelChooser} from './LevelChooser';
 import {WisModChooser} from './WisModChooser';
-import {SelectionHeader} from './SelectionHeader';
+import {PrepareButton} from './PrepareButton';
 import {SpellChoosing2} from './SpellChoosing2';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Chosen} from './Chosen';
@@ -311,7 +311,6 @@ export class Parent extends Component {
 
 
 	render() {
-		let startScreenClass = 'row ' + this.state.startScreenHide;
 
 		return (
 			<div>
@@ -333,9 +332,9 @@ export class Parent extends Component {
 					levelOneSpells={this.state.choseFirst}
 					levelTwoSpells={this.state.choseSecond}/>
 
-				<div className={startScreenClass}>
+				<div className={this.state.startScreenHide}>
 
-					<div className='col-xs' style={{marginBottom:25}}>
+					<div style={{marginBottom:25}}>
 						<LevelChooser
 							onChange = {this.changeClericLevel}
 							level={this.state.clericLevel}
@@ -349,18 +348,8 @@ export class Parent extends Component {
 				</div>
 
 				<div className={this.state.startScreenHide}>
-					<div>
-						<SelectionHeader
-							level={this.state.clericLevel}
-							levelOne={this.state.levelOneSlots}
-							levelTwo={this.state.levelTwoSlots}
-							spellNumber={this.state.spellNumber}
-							handleClick = {this.hideForChoosing}
-							hide = {this.state.startScreenHide}
-							wisMod = {this.state.wisdomMod}
-							levelTwoAvail = {this.state.levelTwoAvail}
-							cantripsKnown = {this.state.cantripsKnown}/>
-					</div>
+					<PrepareButton
+						handleClick = {this.hideForChoosing}/>
 				</div>		
 
 				<Chosen 
@@ -373,6 +362,8 @@ export class Parent extends Component {
 					cleanString={this.convertToBaseName}
 					removeChosen={this.removeChosen}
 					selectMaker={this.selectMaker}/>
+
+			
 				
 
 				<SpellChoosing2

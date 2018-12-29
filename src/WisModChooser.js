@@ -14,12 +14,11 @@ export class WisModChooser extends Component {
 
 
 	render() {
-		let myClass="row " + this.props.hide;
 
 		return (
-			<div className={myClass} style={{marginTop:20, marginLeft:'auto', marginRight:'auto'}}>
+			<div className={this.props.hide} style={{marginLeft:'auto', marginRight:'auto'}}>
 
-				<div className='col-xs' style={{fontSize:16, marginRight:10, textAlign:'left'}}>Choose your Wisdom modifier:</div>
+				<div className='col-xs' style={{fontSize:16, fontWeight:'bold'}}>Wisdom modifier:</div>
 				<input 
 					className='col-xs'
 					style={{textAlign:'center', marginLeft:'auto', marginRight:'auto', width:75}}
